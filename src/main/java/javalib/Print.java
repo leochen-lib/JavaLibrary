@@ -51,29 +51,5 @@ public class Print {
         de.println("}");
     }
     
-    /** HttpServletRequest Print **/
     
-    public static void printParms(HttpServletRequest request) {
-        Enumeration<String> enu = request.getParameterNames();
-        while (enu.hasMoreElements()) {
-            String ele = enu.nextElement();
-            de.println(ele + " : " + request.getParameter(ele));
-        }
-    }
-    
-    public static void printAttributes(HttpServletRequest request) {
-        Enumeration<String> enu = request.getAttributeNames();
-        while (enu.hasMoreElements()) {
-            String ele = enu.nextElement();
-            de.println(ele + " : " + request.getAttribute(ele));
-        }
-    }
-    
-    public static void printHeaders(HttpServletRequest request) {
-        Enumeration<String> enu = request.getHeaderNames();
-        while (enu.hasMoreElements()) {
-            String ele = enu.nextElement();
-            de.println(ele + " : " + request.getHeader(ele));
-        }
-    }
 }
