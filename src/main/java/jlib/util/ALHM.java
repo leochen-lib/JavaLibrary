@@ -1,9 +1,10 @@
-package javalib;
+package jlib.util;
 
-import javalib.Print;
+import jlib.tool.Print;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import jlib.tool.Print;
 
 /**
  *

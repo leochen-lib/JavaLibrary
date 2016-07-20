@@ -1,6 +1,6 @@
-package javalib;
+package jlib.tool;
 
-import javalib.Debug;
+import jlib.tool.Debug;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;

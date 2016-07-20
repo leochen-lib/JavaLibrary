@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javalib.ALHM;
-import javalib.HM;
-import javalib.Print;
+import jlib.util.ALHM;
+import jlib.util.HM;
+import jlib.tool.Print;
 
 public class test {
     /**

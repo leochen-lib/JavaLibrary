@@ -1,6 +1,6 @@
-package javalib;
+package jlib.tool;
 
-import static javalib.TooletStatic.*;
+import static jlib.tool.TooletStatic.*;
 import static java.lang.System.*;
 import java.util.Date;
 

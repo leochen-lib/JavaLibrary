@@ -1,7 +1,8 @@
-package javalib;
+package jlib.util;
 
-import javalib.Print;
+import jlib.tool.Print;
 import java.util.*;
+import jlib.tool.Print;
 
 /**
  *

@@ -1,4 +1,4 @@
-package javalib;
+package jlib;
 
 /**
  *

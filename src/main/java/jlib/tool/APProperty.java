@@ -4,11 +4,11 @@
  * Created on 2007/12/24, 上午 11:28:38
  *
  */
-package javalib;
+package jlib.tool;
 
-import javalib.Debug;
-import javalib.Toolet;
-import static javalib.Constants.*;
+import jlib.tool.Debug;
+import jlib.tool.Toolet;
+import static jlib.Constants.*;
 import java.io.FileInputStream;
 import java.util.Properties;
 

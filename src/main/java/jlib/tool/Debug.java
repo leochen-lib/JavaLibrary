@@ -4,7 +4,7 @@
  * Created on 2007/12/24, 上午 11:28:38
  *
  */
-package javalib;
+package jlib.tool;
 
 import java.util.Date;
 
