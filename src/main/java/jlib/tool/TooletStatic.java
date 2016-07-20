@@ -7,6 +7,7 @@ package jlib.tool;
 
 import jlib.util.ALHM;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +58,7 @@ public class TooletStatic {
         return intArr;
     }
     
-    public static JSONArray list2json(ALHM input) {
+    public static JSONArray list2json(List<Map<String, Object>> input) {
         JSONArray jArr = new JSONArray();
         for (Map<String, Object> item : input) {
             JSONObject jObj = new JSONObject();
