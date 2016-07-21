@@ -109,6 +109,10 @@ public class DBBase {
                 ppst.setString(i + 1, (String) item);
             }else if( item instanceof java.lang.Integer ){
                 ppst.setInt(i + 1, (Integer) item);
+            }else if( item instanceof java.lang.Boolean ){
+                ppst.setBoolean(i + 1, (Boolean) item);
+            }else if( item instanceof java.lang.Double ){
+                ppst.setDouble(i + 1, (Double) item);
             }
             
         }
@@ -132,6 +136,10 @@ public class DBBase {
                 ppst.setString( i + 1, (String) valueList.get(i) );
             }else if( item instanceof java.lang.Integer ){
                 ppst.setInt(i + 1, (Integer) item);
+            }else if( item instanceof java.lang.Boolean ){
+                ppst.setBoolean(i + 1, (Boolean) item);
+            }else if( item instanceof java.lang.Double ){
+                ppst.setDouble(i + 1, (Double) item);
             }
             
         }
