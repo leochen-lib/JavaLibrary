@@ -28,83 +28,17 @@ public class DBFunction extends DBBase {
     ALHM metaList;
     public ALHM getMetaList() {return metaList;}
     
-    public JSONArray selectJson(String sql, List valueList) throws SQLException, JSONException, Exception {
-        rs = exeQuery(sql, valueList);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int numColumns = rsmd.getColumnCount();
-        metaList = new ALHM();
-        
-        if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
-            rs.beforeFirst();
-        }
-
-        JSONArray jArr = new JSONArray();
-        for (int i = 1; rs.next(); i++) {
-            // add meta data
-            if (i == 1) {
-                for (int j = 1; j <= numColumns; j++) {
-                    metaList.add(rsmd.getColumnLabel(j));
-                }
-            }
-            // add row data
-            JSONObject item = new JSONObject();
-            for (int j = 1; j <= numColumns; j++) {
-                String columnLabel = rsmd.getColumnLabel(j);
-                int columnType = rsmd.getColumnType(j);
-                
-                switch(columnType){
-                    case java.sql.Types.ARRAY :
-                        item.put(columnLabel, rs.getArray(j));
-                        break;
-                    case java.sql.Types.BIGINT :
-                        item.put(columnLabel, rs.getInt(j));
-                        break;
-                    case java.sql.Types.BOOLEAN :
-                        item.put(columnLabel, rs.getBoolean(j));
-                        break;
-                    case java.sql.Types.BLOB :
-                        item.put(columnLabel, rs.getBlob(j));
-                        break;
-                    case java.sql.Types.DOUBLE :
-                        item.put(columnLabel, rs.getDouble(j));
-                        break;
-                    case java.sql.Types.FLOAT :
-                        item.put(columnLabel, rs.getFloat(j));
-                        break;
-                    case java.sql.Types.INTEGER :
-                        item.put(columnLabel, rs.getInt(j));
-                        break;
-                    case java.sql.Types.NVARCHAR :
-                        item.put(columnLabel, rs.getNString(j));
-                        break;
-                    case java.sql.Types.VARCHAR :
-                        item.put(columnLabel, rs.getString(j));
-                        break;
-                    case java.sql.Types.TINYINT :
-                        item.put(columnLabel, rs.getInt(j));
-                        break;
-                    case java.sql.Types.SMALLINT :
-                        item.put(columnLabel, rs.getInt(j));
-                        break;
-                    case java.sql.Types.DATE :
-                        item.put(columnLabel, rs.getDate(j));
-                        break;
-                    case java.sql.Types.TIMESTAMP :
-                        item.put(columnLabel, rs.getTimestamp(j));
-                        break;
-                    default :
-                        item.put(columnLabel, rs.getObject(j));
-                        break;
-                }
-            }
-            jArr.put(item);
-        }
-
-        return jArr;
+    public JSONArray selectJson(String sql, Object... inputs) throws SQLException, JSONException, Exception {
+        rs = exeQuery(sql, inputs);
+        return coreSelectJson(rs);
     }
-
-    public ALHM selectList(String sql, List valueList) throws Exception {
-        rs = exeQuery(sql, valueList);
+    
+    public ALHM selectList(String sql, Object... inputs) throws Exception {
+        rs = exeQuery(sql, inputs);
+        return coreSelectList(rs);
+    }
+    
+    protected ALHM coreSelectList(ResultSet rs) throws Exception{
         ResultSetMetaData rsmd = rs.getMetaData();
         int numColumns = rsmd.getColumnCount();
         metaList = new ALHM();
@@ -177,6 +111,79 @@ public class DBFunction extends DBBase {
         }
         return resultList;
     }
+    
+    protected JSONArray coreSelectJson(ResultSet rs) throws Exception{
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int numColumns = rsmd.getColumnCount();
+        metaList = new ALHM();
+        
+        if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
+            rs.beforeFirst();
+        }
+
+        JSONArray jArr = new JSONArray();
+        for (int i = 1; rs.next(); i++) {
+            // add meta data
+            if (i == 1) {
+                for (int j = 1; j <= numColumns; j++) {
+                    metaList.add(rsmd.getColumnLabel(j));
+                }
+            }
+            // add row data
+            JSONObject item = new JSONObject();
+            for (int j = 1; j <= numColumns; j++) {
+                String columnLabel = rsmd.getColumnLabel(j);
+                int columnType = rsmd.getColumnType(j);
+                
+                switch(columnType){
+                    case java.sql.Types.ARRAY :
+                        item.put(columnLabel, rs.getArray(j));
+                        break;
+                    case java.sql.Types.BIGINT :
+                        item.put(columnLabel, rs.getInt(j));
+                        break;
+                    case java.sql.Types.BOOLEAN :
+                        item.put(columnLabel, rs.getBoolean(j));
+                        break;
+                    case java.sql.Types.BLOB :
+                        item.put(columnLabel, rs.getBlob(j));
+                        break;
+                    case java.sql.Types.DOUBLE :
+                        item.put(columnLabel, rs.getDouble(j));
+                        break;
+                    case java.sql.Types.FLOAT :
+                        item.put(columnLabel, rs.getFloat(j));
+                        break;
+                    case java.sql.Types.INTEGER :
+                        item.put(columnLabel, rs.getInt(j));
+                        break;
+                    case java.sql.Types.NVARCHAR :
+                        item.put(columnLabel, rs.getNString(j));
+                        break;
+                    case java.sql.Types.VARCHAR :
+                        item.put(columnLabel, rs.getString(j));
+                        break;
+                    case java.sql.Types.TINYINT :
+                        item.put(columnLabel, rs.getInt(j));
+                        break;
+                    case java.sql.Types.SMALLINT :
+                        item.put(columnLabel, rs.getInt(j));
+                        break;
+                    case java.sql.Types.DATE :
+                        item.put(columnLabel, rs.getDate(j));
+                        break;
+                    case java.sql.Types.TIMESTAMP :
+                        item.put(columnLabel, rs.getTimestamp(j));
+                        break;
+                    default :
+                        item.put(columnLabel, rs.getObject(j));
+                        break;
+                }
+            }
+            jArr.put(item);
+        }
+        return jArr;
+    }
 
 //    public ALHM set(String sql, List valueList) throws Exception {
 //        int result = exeUpdate(sql, valueList);
@@ -186,6 +193,5 @@ public class DBFunction extends DBBase {
 //        resultList.add(hm);
 //        return resultList;
 //    }
-    
     
 }

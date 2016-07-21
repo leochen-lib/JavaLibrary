@@ -97,14 +97,14 @@ public class DBBase {
     /**
      * 
      * @param sql : "SELECT id, account, name FROM account WHERE account = ? and password = ?"
-     * @param valueList : "['account', 'password']"
+     * @param input : "[account]", "[password]"...
      * @return
      * @throws Exception 
      */
-    protected ResultSet exeQuery(String sql, List valueList) throws Exception {
+    protected ResultSet exeQuery(String sql, Object... inputs) throws Exception {
         ppst = con.prepareStatement(sql);
-        for (int i = 0; null != valueList && i < valueList.size(); i++) {
-            Object item = valueList.get(i);
+        for( int i = 0 ; i < inputs.length ; i++){
+            Object item = inputs[i];
             if ( item instanceof java.lang.String ){
                 ppst.setString(i + 1, (String) item);
             }else if( item instanceof java.lang.Integer ){
@@ -114,7 +114,6 @@ public class DBBase {
             }else if( item instanceof java.lang.Double ){
                 ppst.setDouble(i + 1, (Double) item);
             }
-            
         }
         rs = ppst.executeQuery();
         return rs;
@@ -123,17 +122,17 @@ public class DBBase {
     /**
      * 
      * @param sql : "INSERT INTO person (name, email) values (?, ?)"
-     * @param valueList : "['name', 'email']"
+     * @param input : "[account]", "[password]"...
      * @return
      * @throws Exception 
      */
-    protected int exeUpdate(String sql, List valueList) throws Exception {
+    protected int exeUpdate(String sql, Object... inputs) throws Exception {
         int result = 0;
         ppst = con.prepareStatement(sql);
-        for (int i = 0; null != valueList && i < valueList.size(); i++) {
-            Object item = valueList.get(i);
+        for (int i = 0 ; i < inputs.length ; i++) {
+            Object item = inputs[i];
             if ( item instanceof java.lang.String ) {
-                ppst.setString( i + 1, (String) valueList.get(i) );
+                ppst.setString( i + 1, (String) item );
             }else if( item instanceof java.lang.Integer ){
                 ppst.setInt(i + 1, (Integer) item);
             }else if( item instanceof java.lang.Boolean ){
@@ -141,10 +140,10 @@ public class DBBase {
             }else if( item instanceof java.lang.Double ){
                 ppst.setDouble(i + 1, (Double) item);
             }
-            
         }
         result = ppst.executeUpdate();
         return result;
     }
+    
     
 }
