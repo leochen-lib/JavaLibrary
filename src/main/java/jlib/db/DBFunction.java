@@ -28,26 +28,13 @@ public class DBFunction extends DBBase {
     
     ArrayList metaList;
     public ArrayList getMetaList() {return metaList;}
-    
-    public JSONArray selectJson(String sql, Object... inputs) throws SQLException, JSONException, Exception {
-        
+
+    public ALHM selectALHM(String sql, Object... inputs) throws Exception{
         rs = exeQuery(sql, inputs);
         if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
             rs.beforeFirst();
         }
-        return coreJson(rs);
-    }
-    
-    public ALHM selectALHM(String sql, Object... inputs) throws Exception {
         
-        rs = exeQuery(sql, inputs);
-        if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
-            rs.beforeFirst();
-        }
-        return coreALHM(rs);
-    }
-    
-    protected ALHM coreALHM(ResultSet rs) throws Exception{
         ResultSetMetaData rsmd = rs.getMetaData();
         int numColumns = rsmd.getColumnCount();
         
@@ -117,7 +104,12 @@ public class DBFunction extends DBBase {
         return resultALHM;
     }
     
-    protected JSONArray coreJson(ResultSet rs) throws Exception{
+    public JSONArray selectJson(String sql, Object... inputs) throws Exception{
+        rs = exeQuery(sql, inputs);
+        if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
+            rs.beforeFirst();
+        }
+        
         ResultSetMetaData rsmd = rs.getMetaData();
         int numColumns = rsmd.getColumnCount();
 
@@ -186,13 +178,18 @@ public class DBFunction extends DBBase {
         return resultJArr;
     }
 
-    public ALHM set(String sql, List valueList) throws Exception {
-        int result = exeUpdate(sql, valueList);
-        HM hm = new HM();
-        hm.put("result", result);
-        ALHM resultList = new ALHM();
-        resultList.add(hm);
-        return resultList;
+    public ALHM setALHM(String sql, Object... inputs) throws Exception {
+        int result = exeUpdate(sql, inputs);
+        return new ALHM(new HM("result", result));
+    }
+    
+    public JSONArray setJson(String sql, Object... inputs) throws Exception {
+        int result = exeUpdate(sql, inputs);
+        JSONObject item = new JSONObject();
+        item.put("result", result);
+        JSONArray resultJArr = new JSONArray();
+        resultJArr.put(item);
+        return resultJArr;
     }
     
 }

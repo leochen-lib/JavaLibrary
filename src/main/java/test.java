@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static jlib.Constants.dbDriverMySQL;
 import jlib.db.DBFunction;
 import jlib.tool.Debug;
 import jlib.util.ALHM;
@@ -16,19 +17,41 @@ import org.json.JSONArray;
 public class test {
     protected static Debug de = new Debug(true);
     
+    public static final String dbconn = "jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf-8";
+    public static final String dbaccount = "test";
+    public static final String dbpwd = "test";
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        testDBP();
+//        testDBFSelect();
+        testDBFUpdate();
 //        testType(new ALHM());
     }
     
-    static void testType(Object resultType){
+    static void testDBFUpdate(){
+        DBFunction dbf = new DBFunction(dbDriverMySQL, dbconn, dbaccount, dbpwd);
+        try {
+            dbf.connect(true);
+//            ALHM result = dbf.setALHM("INSERT INTO `test`.`location` (`account_id`, `location`, `info`) VALUES (?, ?, ?)", "1", "SHA", "Working");
+//            ALHM result = dbf.setALHM("UPDATE `location` SET `location`=? WHERE `id`=?", "Tokyo", 3);
+//            ALHM result = dbf.setALHM("DELETE FROM `location` WHERE `id`=?", 5);
+//            JSONArray result = dbf.setJson("INSERT INTO `test`.`location` (`account_id`, `location`, `info`) VALUES (?, ?, ?)", "1", "SHA", "Working");
+            JSONArray result = dbf.setJson("UPDATE `location` SET `location`=? WHERE `id`=?", "SHA", 2);
+//            JSONArray result = dbf.setJson("DELETE FROM `location` WHERE `id`=?", 5);
+            dbf.disconnect();
+            
+//            System.out.println( list2json( result ) );
+            System.out.println(result.toString());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    static void testDBP(){
-        DBFunction dbf = new DBFunction("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf-8", "test", "test");
+    static void testDBFSelect(){
+        DBFunction dbf = new DBFunction(dbDriverMySQL, dbconn, dbaccount, dbpwd);
         try {
             dbf.connect(true);
 //            JSONArray result = dbf.selectJson("SELECT * FROM account WHERE account = ?", "leo");

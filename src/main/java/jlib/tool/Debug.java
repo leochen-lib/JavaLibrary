@@ -34,7 +34,7 @@ public class Debug {
         this.TAG = cc.getName();
     }
     
-    public static void setDebug(boolean input){debug = debug;}
+    public static void setDebug(boolean input){debug = input;}
     public static boolean getDebug(){return debug;}
     
     public static void print(Object obj){
