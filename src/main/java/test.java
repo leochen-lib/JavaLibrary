@@ -26,7 +26,7 @@ public class test {
      */
     public static void main(String[] args) {
 //        testDBFSelect();
-        testDBFUpdate();
+//        testDBFUpdate();
 //        testType(new ALHM());
     }
     
