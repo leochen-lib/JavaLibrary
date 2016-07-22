@@ -10,7 +10,7 @@ import jlib.tool.Print;
  *
  * @author leo
  */
-public class ALHM extends ArrayList implements java.io.Serializable {
+public class ALHM extends ArrayList<HashMap<String, Object>> implements java.io.Serializable {
     
     public ALHM(){
         super();

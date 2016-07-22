@@ -7,6 +7,7 @@
 package jlib.db;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import jlib.util.ALHM;
 import jlib.util.HM;
@@ -25,29 +26,33 @@ public class DBFunction extends DBBase {
         super(driverStr, connectStr, account, password);
     }
     
-    ALHM metaList;
-    public ALHM getMetaList() {return metaList;}
+    ArrayList metaList;
+    public ArrayList getMetaList() {return metaList;}
     
     public JSONArray selectJson(String sql, Object... inputs) throws SQLException, JSONException, Exception {
-        rs = exeQuery(sql, inputs);
-        return coreSelectJson(rs);
-    }
-    
-    public ALHM selectList(String sql, Object... inputs) throws Exception {
-        rs = exeQuery(sql, inputs);
-        return coreSelectList(rs);
-    }
-    
-    protected ALHM coreSelectList(ResultSet rs) throws Exception{
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int numColumns = rsmd.getColumnCount();
-        metaList = new ALHM();
         
+        rs = exeQuery(sql, inputs);
         if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
             rs.beforeFirst();
         }
+        return coreJson(rs);
+    }
+    
+    public ALHM selectALHM(String sql, Object... inputs) throws Exception {
         
-        ALHM resultList = new ALHM();
+        rs = exeQuery(sql, inputs);
+        if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
+            rs.beforeFirst();
+        }
+        return coreALHM(rs);
+    }
+    
+    protected ALHM coreALHM(ResultSet rs) throws Exception{
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int numColumns = rsmd.getColumnCount();
+        
+        ALHM resultALHM = new ALHM();
+        metaList = new ArrayList();
         for (int i = 1; rs.next(); i++) {
             // add meta data
             if (i == 1) {
@@ -107,21 +112,17 @@ public class DBFunction extends DBBase {
                 }
                 
             }
-            resultList.add(item);
+            resultALHM.add(item);
         }
-        return resultList;
+        return resultALHM;
     }
     
-    protected JSONArray coreSelectJson(ResultSet rs) throws Exception{
+    protected JSONArray coreJson(ResultSet rs) throws Exception{
         ResultSetMetaData rsmd = rs.getMetaData();
         int numColumns = rsmd.getColumnCount();
-        metaList = new ALHM();
-        
-        if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
-            rs.beforeFirst();
-        }
 
-        JSONArray jArr = new JSONArray();
+        JSONArray resultJArr = new JSONArray();
+        metaList = new ArrayList();
         for (int i = 1; rs.next(); i++) {
             // add meta data
             if (i == 1) {
@@ -180,18 +181,18 @@ public class DBFunction extends DBBase {
                         break;
                 }
             }
-            jArr.put(item);
+            resultJArr.put(item);
         }
-        return jArr;
+        return resultJArr;
     }
 
-//    public ALHM set(String sql, List valueList) throws Exception {
-//        int result = exeUpdate(sql, valueList);
-//        HM hm = new HM();
-//        hm.put("result", result);
-//        ALHM resultList = new ALHM();
-//        resultList.add(hm);
-//        return resultList;
-//    }
+    public ALHM set(String sql, List valueList) throws Exception {
+        int result = exeUpdate(sql, valueList);
+        HM hm = new HM();
+        hm.put("result", result);
+        ALHM resultList = new ALHM();
+        resultList.add(hm);
+        return resultList;
+    }
     
 }

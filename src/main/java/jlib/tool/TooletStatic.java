@@ -5,8 +5,10 @@
  */
 package jlib.tool;
 
+import java.util.ArrayList;
 import jlib.util.ALHM;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
@@ -57,8 +59,9 @@ public class TooletStatic {
         }
         return intArr;
     }
-    
-    public static JSONArray list2json(List<Map<String, Object>> input) {
+    public static JSONArray list2json(ALHM input) {return list2json( (ArrayList<HashMap<String, Object>>)input );}
+    public static JSONArray list2json(List input) {return list2json( (ArrayList<HashMap<String, Object>>)input );}
+    public static JSONArray list2json(ArrayList<HashMap<String, Object>> input) {
         JSONArray jArr = new JSONArray();
         for (Map<String, Object> item : input) {
             JSONObject jObj = new JSONObject();

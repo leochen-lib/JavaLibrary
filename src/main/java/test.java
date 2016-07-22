@@ -6,31 +6,39 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jlib.db.DBFunction;
+import jlib.tool.Debug;
 import jlib.util.ALHM;
 import jlib.util.HM;
 import jlib.tool.Print;
+import static jlib.tool.TooletStatic.list2json;
 import org.json.JSONArray;
 
 public class test {
+    protected static Debug de = new Debug(true);
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        testDBP();
+        testDBP();
+//        testType(new ALHM());
+    }
+    
+    static void testType(Object resultType){
     }
     
     static void testDBP(){
-        DBFunction dbf = new DBFunction("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf-8", "test", "");
-        ArrayList valueList = new ArrayList();
-        valueList.add("leo");
+        DBFunction dbf = new DBFunction("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf-8", "test", "test");
         try {
             dbf.connect(true);
-            JSONArray result = dbf.selectJson("SELECT * FROM account WHERE account = ?", valueList);
-//            JSONArray result = dbf.selectJson("select * from `account`, `location` where `location`.`account_id` = `account`.`id`", null);
-//            ALHM result = dbf.selectList("select * from `account`, `location` where `location`.`account_id` = `account`.`id`", null);
+//            JSONArray result = dbf.selectJson("SELECT * FROM account WHERE account = ?", "leo");
+//            JSONArray result = dbf.selectJson("select * from `account`, `location` where `location`.`account_id` = `account`.`id`");
+            ALHM result = dbf.selectALHM("select * from `account`, `location` where `location`.`account_id` = `account`.`id`");
             dbf.disconnect();
             
-            System.out.println(result.toString());
+//            System.out.println(result.toString());
+            System.out.println( list2json( result ) );
+            
         } catch (Exception ex) {
             Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         }

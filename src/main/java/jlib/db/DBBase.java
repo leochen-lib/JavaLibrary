@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import jlib.tool.Debug;
 import jlib.util.ALHM;
 import jlib.util.HM;
 
@@ -19,7 +20,7 @@ import jlib.util.HM;
  */
 public class DBBase {
     
-    //debug de = new debug(false);
+    protected static Debug de = new Debug(false);
 
 //    public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
 

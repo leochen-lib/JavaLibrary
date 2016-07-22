@@ -8,7 +8,7 @@ import jlib.tool.Print;
  *
  * @author leo
  */
-public class HM extends HashMap implements java.io.Serializable{
+    public class HM extends HashMap<String, Object> implements java.io.Serializable{
     
     public HM(){
         super();
