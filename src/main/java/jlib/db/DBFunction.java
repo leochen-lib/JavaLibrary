@@ -29,7 +29,7 @@ public class DBFunction extends DBBase {
     ArrayList metaList;
     public ArrayList getMetaList() {return metaList;}
 
-    public ALHM selectALHM(String sql, Object... inputs) throws Exception{
+    public ALHM getALHM(String sql, Object... inputs) throws Exception{
         rs = exeQuery(sql, inputs);
         if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
             rs.beforeFirst();
@@ -104,7 +104,7 @@ public class DBFunction extends DBBase {
         return resultALHM;
     }
     
-    public JSONArray selectJson(String sql, Object... inputs) throws Exception{
+    public JSONArray getJson(String sql, Object... inputs) throws Exception{
         rs = exeQuery(sql, inputs);
         if (rs.getType() != java.sql.ResultSet.TYPE_FORWARD_ONLY) {
             rs.beforeFirst();

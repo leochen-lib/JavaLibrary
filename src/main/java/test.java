@@ -34,10 +34,10 @@ public class test {
         DBFunction dbf = new DBFunction(dbDriverMySQL, dbconn, dbaccount, dbpwd);
         try {
             dbf.connect(true);
-//            ALHM result = dbf.setALHM("INSERT INTO `test`.`location` (`account_id`, `location`, `info`) VALUES (?, ?, ?)", "1", "SHA", "Working");
+//            ALHM result = dbf.setALHM("INSERT INTO `location` (`account_id`, `location`, `info`) VALUES (?, ?, ?)", "1", "SHA", "Working");
 //            ALHM result = dbf.setALHM("UPDATE `location` SET `location`=? WHERE `id`=?", "Tokyo", 3);
 //            ALHM result = dbf.setALHM("DELETE FROM `location` WHERE `id`=?", 5);
-//            JSONArray result = dbf.setJson("INSERT INTO `test`.`location` (`account_id`, `location`, `info`) VALUES (?, ?, ?)", "1", "SHA", "Working");
+//            JSONArray result = dbf.setJson("INSERT INTO `location` (`account_id`, `location`, `info`) VALUES (?, ?, ?)", "1", "SHA", "Working");
             JSONArray result = dbf.setJson("UPDATE `location` SET `location`=? WHERE `id`=?", "SHA", 2);
 //            JSONArray result = dbf.setJson("DELETE FROM `location` WHERE `id`=?", 5);
             dbf.disconnect();
@@ -54,9 +54,9 @@ public class test {
         DBFunction dbf = new DBFunction(dbDriverMySQL, dbconn, dbaccount, dbpwd);
         try {
             dbf.connect(true);
-//            JSONArray result = dbf.selectJson("SELECT * FROM account WHERE account = ?", "leo");
-//            JSONArray result = dbf.selectJson("select * from `account`, `location` where `location`.`account_id` = `account`.`id`");
-            ALHM result = dbf.selectALHM("select * from `account`, `location` where `location`.`account_id` = `account`.`id`");
+//            JSONArray result = dbf.getJson("SELECT * FROM account WHERE account = ?", "leo");
+//            JSONArray result = dbf.getJson("select * from `account`, `location` where `location`.`account_id` = `account`.`id`");
+            ALHM result = dbf.getALHM("select * from `account`, `location` where `location`.`account_id` = `account`.`id`");
             dbf.disconnect();
             
 //            System.out.println(result.toString());
