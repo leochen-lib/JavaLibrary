@@ -16,10 +16,6 @@ public class Constants {
     public static enum DBServer {
         MySQL, SQLite, Oracle, SQLServer
     }
-
-    public static final String propertyFolderStr = "properties/";
-    public static final String appStr = "app.properties";
-    public static final String dbStr = "db.properties";
     
     public static final String prefixMySQL = "jdbc:mysql:"; // 3306
     public static final String prefixSQLite = "jdbc:sqlite:"; 
@@ -35,4 +31,5 @@ public class Constants {
     public static final String dbPrefix_driver = "driver";
     public static final String dbPrefix_account = "account";
     public static final String dbPrefix_pwd = "pwd";
+    
 }

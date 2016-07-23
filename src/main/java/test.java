@@ -7,12 +7,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static jlib.Constants.dbDriverMySQL;
 import jlib.db.DBFunction;
+import jlib.tool.AppProp;
 import jlib.tool.Debug;
 import jlib.util.ALHM;
 import jlib.util.HM;
 import jlib.tool.Print;
 import static jlib.tool.TooletStatic.list2json;
 import org.json.JSONArray;
+import static jlib.tool.TooletStatic.list2json;
+import static jlib.tool.TooletStatic.list2json;
+import static jlib.tool.TooletStatic.list2json;
 
 public class test {
     protected static Debug de = new Debug(true);
@@ -28,6 +32,13 @@ public class test {
 //        testDBFSelect();
 //        testDBFUpdate();
 //        testType(new ALHM());
+        testProp();
+    }
+    
+    static void testProp(){
+        AppProp app = new AppProp("/Volumes/SD_120/Data/work/project.self/JavaLibrary/src/main/java/properties/", "app.properties");
+        String env = app.getValue("env.filter");
+        de.println(env);
     }
     
     static void testDBFUpdate(){
