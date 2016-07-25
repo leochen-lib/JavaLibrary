@@ -14,6 +14,7 @@ import jlib.util.HM;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import static jlib.tool.TooletStatic.isNumber;
 
 /**
  *
@@ -190,6 +191,35 @@ public class DBFunction extends DBBase {
         JSONArray resultJArr = new JSONArray();
         resultJArr.put(item);
         return resultJArr;
+    }
+    
+    
+    static int defaultPageSize = 10;
+    static void setDefaultPageSize(int input){defaultPageSize = input;}
+    static int getDefaultPageSize(int input){return defaultPageSize;}
+    public static String pageing(String pageNumber){
+        if ( isNumber(pageNumber) ){
+            return pageing(defaultPageSize, Integer.parseInt(pageNumber));
+        }else{
+            return "";
+        }
+    }
+    public static String pageing(int pageNumber){
+        return pageing(defaultPageSize, pageNumber);
+    }
+    public static String pageing(String pageSize, String pageNumber){
+        if ( isNumber(pageSize) && isNumber(pageNumber) ){
+            return pageing(Integer.parseInt(pageSize), Integer.parseInt(pageNumber));
+        }else{
+            return "";
+        }
+    }
+    public static String pageing(int pageSize, int pageNumber){
+        if ( pageSize > 0 ){ 
+            return " LIMIT "+ (pageNumber - 1) * pageSize + ", " + pageSize ;
+        }else{
+            return "";
+        }
     }
     
 }
