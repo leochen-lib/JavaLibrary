@@ -13,6 +13,7 @@ import java.util.List;
 import jlib.tool.Debug;
 import jlib.util.ALHM;
 import jlib.util.HM;
+import java.util.Date;
 
 /**
  *
@@ -114,6 +115,8 @@ public class DBBase {
                 ppst.setBoolean(i + 1, (Boolean) item);
             }else if( item instanceof java.lang.Double ){
                 ppst.setDouble(i + 1, (Double) item);
+            }else if( item instanceof java.util.Date ){
+                ppst.setDate(i + 1, new java.sql.Date( ((Date)item).getTime() ) );
             }
         }
         rs = ppst.executeQuery();
@@ -140,6 +143,8 @@ public class DBBase {
                 ppst.setBoolean(i + 1, (Boolean) item);
             }else if( item instanceof java.lang.Double ){
                 ppst.setDouble(i + 1, (Double) item);
+            }else if( item instanceof java.util.Date ){
+                ppst.setDate(i + 1, new java.sql.Date( ((Date)item).getTime() ) );
             }
         }
         result = ppst.executeUpdate();

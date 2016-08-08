@@ -23,6 +23,8 @@ public class Constants {
     public static final String prefixSQLServer = "jdbc:sqlserver:"; // 1433
     
     public static final String dbDriverMySQL = "com.mysql.jdbc.Driver";
+    public static final String dbDriverMySQL6 = "com.mysql.cj.jdbc.Driver";
+//    public static final String dbDriverMariadb = "org.mariadb.jdbc.Driver";
     public static final String dbDriverSQLite = "org.sqlite.JDBC";
     public static final String dbDriverOracle = "oracle.jdbc.driver.OracleDriver";
     public static final String dbDriverSQLServer = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
