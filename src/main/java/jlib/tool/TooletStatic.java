@@ -39,6 +39,21 @@ public class TooletStatic {
         }
     }
     
+    public static boolean isNull(Object input){
+        if ( null == input ){return true;}
+        else{return false;}
+    }
+    
+    public static boolean isEmpty(Object input){
+        boolean isNull = isNull(input);
+        if(isNull){return true;}
+        else if( "".equals(input.toString()) ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     /* Data Sort */
     public static Integer[] sortInt(String... inputs) {
         Integer[] intArr = null;
