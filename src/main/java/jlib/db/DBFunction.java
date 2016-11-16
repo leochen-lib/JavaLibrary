@@ -82,6 +82,9 @@ public class DBFunction extends DBBase {
                     case java.sql.Types.VARCHAR :
                         item.put(columnLabel, rs.getString(j));
                         break;
+                    case java.sql.Types.LONGVARBINARY :
+                        item.put(columnLabel, rs.getString(j));
+                        break;
                     case java.sql.Types.TINYINT :
                         item.put(columnLabel, rs.getInt(j));
                         break;
@@ -93,6 +96,9 @@ public class DBFunction extends DBBase {
                         break;
                     case java.sql.Types.TIMESTAMP :
                         item.put(columnLabel, rs.getTimestamp(j));
+                        break;
+                    case java.sql.Types.NULL :
+                        item.put(columnLabel, null);
                         break;
                     default :
                         item.put(columnLabel, rs.getObject(j));
