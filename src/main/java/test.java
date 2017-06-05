@@ -29,10 +29,31 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        testDBFSelect();
+        int[] nums = {3,3};
+        int[] result = twoSum(nums , 6);
+        System.out.println(result[0] + ", "+result[1]);
+//        testDBFSelect();
 //        testDBFUpdate();
 //        testType(new ALHM());
 //        testProp();
+    }
+    
+    static int[] twoSum(int[] nums, int target) {
+        int[] result = new int[2];
+        for( int i=0 ; i<nums.length ; i++){
+            for( int j=0 ; j<nums.length ; j++ ){
+                if ( nums[i]+nums[j] == target ){
+                    System.out.println(i+";"+j);
+                    System.out.println(i+";"+j);
+                    result[0] = i;
+                    result[1] = j;
+                }else{
+                    result[0] = -1;
+                    result[1] = -1;
+                }
+            }
+        }
+        return result;
     }
     
     static void testProp(){
