@@ -21,8 +21,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author leo
  */
 public class Writer {
-    
-    private static void output2Excel(List<List> input){
+
+    public static void write2Excel(List<List> input, String filename){
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Amazon");
 
@@ -41,7 +41,7 @@ public class Writer {
             }
         }
 
-        try (FileOutputStream outputStream = new FileOutputStream("CrawlerAmazon.xlsx")) {
+        try (FileOutputStream outputStream = new FileOutputStream(filename)) {
             workbook.write(outputStream);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
